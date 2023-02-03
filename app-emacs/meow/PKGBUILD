@@ -1,0 +1,36 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+_base=meow
+pkgname=${_base}-git
+pkgver=1.4.2.2a736d9
+pkgrel=1
+pkgdesc="Yet another modal editing on Emacs"
+arch=('any')
+url="https://github.com/meow-edit/${_base}"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${_base})
+conflicts=(${_base})
+source=("git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${_base}"
+    printf "${pkgver}.%s" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	  cd "${srcdir}/${_base}"
+	  emacs -Q --batch -L . -f batch-byte-compile *.el
+}
+
+package() {
+	  cd "${srcdir}/${_base}"
+
+    # install -d create the dir for to-be-installed files
+    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    # install -D actually cp the to-be-installed files to the dir above
+	  install -Dm644 *.{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    install -Dm644 *.org "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+}
