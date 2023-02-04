@@ -17,7 +17,8 @@ sha256sums=('SKIP')
 
 pkgver() {
     cd "${srcdir}/${_base}"
-    printf "${pkgver}.%s" "$(git rev-parse --short HEAD)"
+    local pkgv=1.4.2
+    printf "${pkgv}.%s" "$(git rev-parse --short HEAD)"
 }
 
 build() {
@@ -31,6 +32,6 @@ package() {
     # install -d create the dir for to-be-installed files
     install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
     # install -D actually cp the to-be-installed files to the dir above
-	  install -Dm644 *.{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    install -Dm644 *.{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
     install -Dm644 *.org "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
 }
