@@ -1,0 +1,27 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=vundo
+pkgver=2.0.0
+pkgrel=1
+pkgdesc="Visualize the undo tree"
+arch=('any')
+url="https://github.com/casouri/vundo"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=("${pkgname}-git")
+checkdepends=()
+source=("git+${url}")
+sha256sums=('SKIP')
+
+build() {
+	  cd "${srcdir}/${pkgname}"
+	  emacs -Q --batch -L . -f batch-byte-compile vundo.el
+}
+
+package() {
+	  cd "${srcdir}/${pkgname}"
+    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    install -Dm644 vundo.{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+}
