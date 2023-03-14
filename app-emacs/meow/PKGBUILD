@@ -2,7 +2,7 @@
 
 _base=meow
 pkgname=${_base}-git
-pkgver=1.4.2
+pkgver=1.4.2.d80c2ff
 pkgrel=1
 pkgdesc="Yet another modal editing on Emacs"
 arch=('any')
