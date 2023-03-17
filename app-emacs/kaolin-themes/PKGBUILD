@@ -1,0 +1,25 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=emacs-kaolin-themes
+pkgver=1.6.8
+pkgrel=1
+pkgdesc="Set of eye pleasing themes for GNU Emacs. Supports both GUI and terminal."
+arch=('any')
+url="https://github.com/ogdenwebb/emacs-kaolin-themes"
+license=('GPL3')
+# groups=()
+provides=(${pkgname})
+conflicts=(${pkgname}-git)
+depends=('emacs')
+checkdepends=()
+source=("https://github.com/ogdenwebb/emacs-kaolin-themes/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+
+package() {
+	  cd "$pkgname-$pkgver"
+    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"/themes
+    install -Dm644 *.el "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    install -Dm644 themes/*.el "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"/themes
+}
