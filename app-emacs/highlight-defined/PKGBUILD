@@ -21,7 +21,12 @@ build() {
 }
 
 package() {
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    fi
 	  cd "${srcdir}/${pkgname}-${pkgver}"
-    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
-    install -Dm644 "${pkgname}".{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    install -d "${dest}"
+    install -Dm644 "${pkgname}".{el,elc} "${dest}"
 }

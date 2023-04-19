@@ -2,7 +2,7 @@
 
 _base=meow
 pkgname=${_base}-git
-pkgver=1.4.2.d80c2ff
+pkgver=1.4.2.4fe321a
 pkgrel=1
 pkgdesc="Yet another modal editing on Emacs"
 arch=('any')
@@ -29,9 +29,15 @@ build() {
 package() {
 	  cd "${srcdir}/${_base}"
 
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${_base}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    fi
+
     # install -d create the dir for to-be-installed files
-    install -d "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    install -d "${dest}"
     # install -D actually cp the to-be-installed files to the dir above
-    install -Dm644 *.{el,elc} "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
-    install -Dm644 *.org "${pkgdir}"/usr/share/emacs/site-lisp/"${_base}"
+    install -Dm644 *.{el,elc} "${dest}"
+    install -Dm644 *.org "${dest}"
 }
