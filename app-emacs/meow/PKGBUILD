@@ -23,7 +23,7 @@ pkgver() {
 
 build() {
 	  cd "${srcdir}/${_base}"
-	  emacs -Q --batch -L . -f batch-byte-compile *.el
+	  emacs -Q -L . --batch -f batch-byte-compile *.el
 }
 
 package() {

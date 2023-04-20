@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 build() {
 	  cd "${srcdir}/${pkgname}-${pkgver}"
-	  emacs -Q --batch -L . -f batch-byte-compile ${pkgname}.el
+	  emacs -Q -L . --batch -f batch-byte-compile ${pkgname}.el
 }
 
 package() {

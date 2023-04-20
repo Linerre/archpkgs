@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 build() {
 	  cd "${srcdir}/${pkgname}"
-	  emacs -Q --batch -L . -f batch-byte-compile vundo.el
+	  emacs -Q -L . --batch -f batch-byte-compile vundo.el
 }
 
 package() {
