@@ -1,0 +1,42 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=vertico
+pkgver=1.2
+pkgrel=1
+pkgdesc="VERTical Interactive COmpletion"
+arch=('any')
+url="https://github.com/minad/vertico"
+license=('GPL')
+# groups=()
+depends=('emacs' 'compat')
+provides=(${pkgname})
+conflicts=("${pkgname}-git")
+checkdepends=()
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/minad/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+
+	  emacs -Q \
+          -L . \
+          -L ./extensions \
+          -L /usr/local/share/emacs/site-lisp/compat/ \
+          -batch -f batch-byte-compile "${pkgname}".el extensions/*.el
+
+}
+
+package() {
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    fi
+
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+    install -d "${dest}"
+    install -d "${dest}/extensions"
+
+    install -Dm644 *.{el,elc} "${dest}"
+    install -Dm644 extensions/*.{el,elc} "${dest}/extensions"
+}

@@ -1,0 +1,33 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=compat
+pkgver=29.1.4.1
+pkgrel=1
+pkgdesc="COMPATibility Library for Emacs Lisp"
+arch=('any')
+url="https://github.com/emacs-compat/compat"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=("${pkgname}-git")
+checkdepends=()
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/emacs-compat/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+	  emacs -Q --batch -L . -f batch-byte-compile "${pkgname}".el
+}
+
+package() {
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    fi
+
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+    install -d "${dest}"
+    install -Dm644 *.{el,elc} "${dest}"
+}
