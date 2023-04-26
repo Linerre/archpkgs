@@ -1,0 +1,29 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=carbon-theme
+pkgver=20230422
+pkgrel=1
+pkgdesc="A dark theme for Emacs"
+arch=('any')
+url="https://github.com/DogLooksGood/${pkgname}"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=(${pkgname}-git)
+source=("git+${url}")
+sha256sums=('SKIP')
+
+package() {
+    cd "${srcdir}/${pkgname}"
+
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    fi
+
+    install -d "${dest}"
+    # install -D actually cp the to-be-installed files to the dir above
+    install -Dm644 *.el "${dest}"
+}
