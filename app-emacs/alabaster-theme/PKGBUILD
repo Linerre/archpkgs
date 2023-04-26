@@ -1,0 +1,29 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+_reponame=emacs-alabaster
+pkgname=alabaster-theme
+pkgver=0.1.5
+pkgrel=1
+pkgdesc="Alabaster taste for Emacs"
+arch=('any')
+url="https://github.com/Linerre/emacs-alabaster"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=(${pkgname}-git)
+source=("git+${url}")
+sha256sums=('SKIP')
+
+package() {
+    cd "${srcdir}/${_reponame}"
+
+    if [[ -x /usr/local/bin/emacs || -L /usr/local/bin/emacs ]] ; then
+        local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    else
+        local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
+    fi
+
+    install -d "${dest}"
+    install -Dm644 *.el "${dest}"
+}
