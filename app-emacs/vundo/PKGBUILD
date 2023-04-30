@@ -7,7 +7,6 @@ pkgdesc="Visualize the undo tree"
 arch=('any')
 url="https://github.com/casouri/vundo"
 license=('GPL')
-# groups=()
 depends=('emacs')
 provides=(${pkgname})
 conflicts=("${pkgname}-git")

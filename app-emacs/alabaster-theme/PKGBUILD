@@ -2,7 +2,7 @@
 
 _reponame=emacs-alabaster
 pkgname=alabaster-theme
-pkgver=0.1.5
+pkgver=0.1.9
 pkgrel=1
 pkgdesc="Alabaster taste for Emacs"
 arch=('any')
