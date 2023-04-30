@@ -1,0 +1,20 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=zprint
+pkgver=1.2.5
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=('x86_64')
+url="https://github.com/kkinnear/zprint/releases/download/${pkgver}/${pkgname}l-${pkgver}"
+license=('MIT')
+groups=()
+provides=('zprint')
+conflicts=('zprint-git')
+source=("$pkgname::${url}")
+md5sums=('SKIP')
+
+package() {
+    install -d "${pkgdir}"/usr/bin/
+    install -m755 zprint "${pkgdir}"/usr/bin/
+}
