@@ -3,6 +3,7 @@
 pkgname=zprint
 pkgver=1.2.5
 pkgrel=1
+pkgdesc="A library to beautifully format Clojure and Clojurescript source code and s-expressions."
 epoch=
 pkgdesc=""
 arch=('x86_64')
