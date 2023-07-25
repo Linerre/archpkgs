@@ -1,0 +1,35 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=ttf-oldschool
+pkgver=2.2
+pkgrel=1
+epoch=
+pkgdesc="The ultimate oldschool PC font pack"
+arch=('any')
+url="https://int10h.org/oldschool-pc-fonts"
+license=('custom:CC-BY-SA-4.0')
+depends=('unzip')
+provides=('ttf-ibm-vga' 'ttf-vga')
+source=("${url}/download/oldschool_pc_font_pack_v${pkgver}_linux.zip")
+md5sums=('SKIP')
+
+prepare() {
+    cd "$srcdir"
+    local ttf_fonts=(
+        'ttf - Ac (aspect-corrected)'
+        'ttf - Mx (mixed outline+bitmap)'
+        'ttf - Px (pixel outline)'
+    )
+
+    [[ ! -d oldschool ]] && mkdir -p "$srcdir/oldschool"
+
+    for ttf in "${ttf_fonts[@]}"; do
+        cp "${ttf}"/*.ttf "$srcdir/oldschool"
+    done
+}
+
+package() {
+	  cd "$srcdir"
+    install -d "$pkgdir/usr/share/fonts/oldschool"
+    cp oldschool/*.ttf "$pkgdir/usr/share/fonts/oldschool/"
+}
