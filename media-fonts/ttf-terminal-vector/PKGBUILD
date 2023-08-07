@@ -1,0 +1,21 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+_fontname=TerminalVector
+pkgname=ttf-terminal-vector
+pkgver=0.1
+pkgrel=1
+pkgdesc="The ultimate oldschool PC font pack"
+arch=('any')
+url="http://www.yohng.com/software/terminalvector.html"
+license=('custom:MS')
+depends=('unzip')
+provides=('ttf-ms-terminal' 'ttf-ms-vector')
+source=("http://www.yohng.com/files/${_fontname}.zip")
+md5sums=('SKIP')
+
+package() {
+	  cd "$srcdir"
+    local dest=terminal-vector
+    install -d "$pkgdir/usr/share/fonts/${dest}"
+    cp "${_fontname}".{txt,ttf} "$pkgdir/usr/share/fonts/${dest}/"
+}
