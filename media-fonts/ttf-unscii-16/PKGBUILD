@@ -1,0 +1,19 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+_base=unscii-16-full
+pkgname=ttf-unscii-16-full
+pkgver=2.0
+pkgrel=1
+pkgdesc="The ultimate oldschool PC font pack"
+arch=('any')
+url="http://viznut.fi/unscii/"
+license=('GPL')
+provides=('ttf-unscii-full' 'unscii-16')
+source=("http://viznut.fi/unscii/${_base}.ttf")
+md5sums=('SKIP')
+
+package() {
+    cd "$srcdir"
+    install -d "$pkgdir/usr/share/fonts/unscii"
+    cp ${_base}.ttf "$pkgdir/usr/share/fonts/unscii/"
+}
