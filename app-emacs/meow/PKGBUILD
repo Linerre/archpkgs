@@ -2,7 +2,7 @@
 
 _base=meow
 pkgname=${_base}-git
-pkgver=1.4.2.5b51f87
+pkgver=1.4.3.f553db1
 pkgrel=1
 pkgdesc="Yet another modal editing on Emacs"
 arch=('any')
@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 pkgver() {
     cd "${srcdir}/${_base}"
-    local pkgv=1.4.2
+    local pkgv=1.4.3
     printf "${pkgv}.%s" "$(git rev-parse --short HEAD)"
 }
 
