@@ -1,0 +1,13 @@
+# Consola font
+pkgname=ttf-consola
+pkgver=1
+pkgrel=1
+pkgdesc="My favourite consola font"
+arch=('x86_64')
+license=('custom')
+
+package() {
+    cd ../consola
+    install -d "$pkgdir/usr/share/fonts/consola"
+    cp *.ttf "$pkgdir/usr/share/fonts/consola/"
+}

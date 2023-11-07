@@ -1,5 +1,6 @@
 pkg/
 src/
+consola/
 *pkg.tar.zst
 *.tar.gz
 *.zip
