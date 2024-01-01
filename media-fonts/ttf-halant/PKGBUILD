@@ -1,0 +1,15 @@
+# Consola font
+pkgname=ttf-halant
+pkgver=1
+pkgrel=1
+pkgdesc="Halant font"
+url="https://fonts.google.com/specimen/Halant"
+#url="https://github.com/itfoundry/halant"
+arch=('x86_64')
+license=('OFT')
+
+package() {
+    cd ../halant
+    install -d "$pkgdir/usr/share/fonts/halant"
+    cp *.ttf "$pkgdir/usr/share/fonts/halant/"
+}
