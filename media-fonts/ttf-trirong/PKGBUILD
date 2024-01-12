@@ -1,0 +1,14 @@
+# Consola font
+pkgname=ttf-trirong
+pkgver=1
+pkgrel=1
+pkgdesc="Trirong font"
+url="https://fonts.google.com/specimen/Trirong"
+arch=('x86_64')
+license=('OFT')
+
+package() {
+    cd ../trirong
+    install -d "$pkgdir/usr/share/fonts/trirong"
+    cp *.ttf "$pkgdir/usr/share/fonts/trirong/"
+}
