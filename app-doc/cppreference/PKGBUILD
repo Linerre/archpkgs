@@ -1,0 +1,21 @@
+# Maintainer: Errelin <zlinerre@gmail.com>
+
+pkgname=cppreference
+pkgver=20230810
+pkgrel=1
+pkgdesc='An unofficial fork of cppreference html book'
+arch=('any')
+url='https://github.com/PeterFeicht/cppreference-doc'
+license=('GPL-3')
+source=("${pkgname}::https://github.com/PeterFeicht/cppreference-doc/releases/download/v${pkgver}/html-book-${pkgver}.tar.xz")
+b2sums=('SKIP')
+
+# pkgver() {
+#   date "+%Y%m%d"
+# }
+
+package() {
+  cd "$pkgsrc"
+  install -vdm755 "$pkgdir/usr/share/doc/${pkgname}"
+  cp -r reference/* "$pkgdir/usr/share/doc/${pkgname}/"
+}

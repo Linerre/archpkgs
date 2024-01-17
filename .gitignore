@@ -1,6 +1,8 @@
 pkg/
 src/
 consola/
+halant/
+trirong/
 *pkg.tar.zst
 *.tar.gz
 *.zip
