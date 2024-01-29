@@ -1,0 +1,33 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=move-mode
+pkgver=1.0
+pkgrel=1
+pkgdesc="Emacs major mode for Move smart contract programming language."
+arch=('any')
+url="https://github.com/amnn/move-mode"
+license=('Apache-2.0')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=("${pkgname}-git")
+checkdepends=()
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/amnn/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+
+	  emacs -Q \
+          -batch -f batch-byte-compile "${pkgname}".el
+
+}
+
+package() {
+    local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+    install -d "${dest}"
+
+    install -Dm644 "${pkgname}".{el,elc} "${dest}"
+}
