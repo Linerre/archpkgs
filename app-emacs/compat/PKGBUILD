@@ -1,7 +1,7 @@
 # Maintainer: Errenil Noel <errelinaaron@gmail.com>
 
 pkgname=compat
-pkgver=29.1.4.1
+pkgver=29.1.4.4
 pkgrel=1
 pkgdesc="COMPATibility Library for Emacs Lisp"
 arch=('any')
