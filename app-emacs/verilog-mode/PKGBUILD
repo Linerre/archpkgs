@@ -1,0 +1,29 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=verilog-mode
+pkgver=2023.6.6
+pkgrel=1
+pkgdesc="Major mode for editing verilog source in Emacs"
+arch=('any')
+url="http://veripool.org/${pkgname}"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=(${pkgname})
+checkdepends=()
+source=("git+https://github.com/veripool/${pkgname}")
+sha256sums=('SKIP')
+
+build() {
+	  cd "${srcdir}/${pkgname}"
+    make emacs
+}
+
+package() {
+    cd "${srcdir}/${pkgname}/e"
+    local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+
+    install -d "${dest}"
+    install -Dm644 *.{el,elc} "${dest}"
+}
