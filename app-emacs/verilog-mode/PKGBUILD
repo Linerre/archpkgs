@@ -22,7 +22,8 @@ build() {
 
 package() {
     cd "${srcdir}/${pkgname}/e"
-    local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+    # TO override the emacs native verilog-mode, which may be rather outdated
+    local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
 
     install -d "${dest}"
     install -Dm644 *.{el,elc} "${dest}"
