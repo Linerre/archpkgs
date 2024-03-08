@@ -1,0 +1,38 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+pkgname=typst-ts-mode
+pkgver=9999.24d0095
+pkgrel=1
+pkgdesc="Typst tree sitter major mode for Emacs"
+arch=('any')
+url="https://git.sr.ht/~meow_king/${pkgname}"
+license=('GPL')
+# groups=()
+depends=('emacs')
+provides=(${pkgname})
+conflicts=(${pkgname} ${pkgname}-git)
+checkdepends=()
+source=("git+https://git.sr.ht/~meow_king/typst-ts-mode")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    local pkgv=9999
+    printf "${pkgv}.%s" $(git rev-parse --short HEAD)
+}
+
+build() {
+	  cd "${srcdir}/${pkgname}"
+    emacs -Q -L . --batch -f batch-byte-compile typst-ts-mode.el \
+          typst-ts-embedding-lang-settings.el
+}
+
+package() {
+    cd "${srcdir}/${pkgname}/"
+    # TO override the emacs native verilog-mode, which may be rather outdated
+    local dest="${pkgdir}"/usr/local/share/emacs/site-lisp/"${pkgname}"
+
+    install -d "${dest}"
+    install -Dm644 typst-ts-mode.{el,elc} "${dest}"
+    install -Dm644 typst-ts-embedding-lang-settings.{el,elc} "${dest}"
+}
