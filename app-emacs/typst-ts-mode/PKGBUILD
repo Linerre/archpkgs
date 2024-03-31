@@ -1,7 +1,7 @@
 # Maintainer: Errenil Noel <errelinaaron@gmail.com>
 
 pkgname=typst-ts-mode
-pkgver=9999.01b8025
+pkgver=9999.0.0.01b8025
 pkgrel=1
 pkgdesc="Typst tree sitter major mode for Emacs"
 arch=('any')
@@ -17,14 +17,13 @@ sha256sums=('SKIP')
 
 pkgver() {
     cd "${srcdir}/${pkgname}"
-    local pkgv=9999
+    local pkgv=9999.0.0
     printf "${pkgv}.%s" $(git rev-parse --short HEAD)
 }
 
 build() {
 	  cd "${srcdir}/${pkgname}"
-    emacs -Q -L . --batch -f batch-byte-compile typst-ts-mode.el \
-          typst-ts-embedding-lang-settings.el
+    emacs -Q -L . --batch -f batch-byte-compile *.el
 }
 
 package() {
@@ -32,6 +31,6 @@ package() {
     local dest="${pkgdir}"/usr/share/emacs/site-lisp/"${pkgname}"
 
     install -d "${dest}"
-    install -Dm644 typst-ts-mode.{el,elc} "${dest}"
-    install -Dm644 typst-ts-embedding-lang-settings.{el,elc} "${dest}"
+    install -Dm644 *.{el,elc} "${dest}"
+    install -Dm644 doc/*.md "${dest}"
 }
