@@ -1,0 +1,78 @@
+# Maintainer: Errenil Noel <leon.errelin@outlook.com>
+
+pkgbase=emacs
+pkgname=(emacs)
+pkgver=30.0.91
+pkgrel=1
+pkgdesc='The extensible, customizable, self-documenting real-time display editor'
+arch=('x86_64')
+url='https://www.gnu.org/software/emacs/emacs.html'
+license=('GPL3')
+depends=(
+  gmp
+  gnutls
+  jansson
+  lcms2
+  libacl.so
+  libdbus-1.so
+  libfontconfig.so
+  libfreetype.so
+  libharfbuzz.so
+  libice
+  libjpeg.so
+  libncursesw.so
+  libpng
+  librsvg-2.so
+  libsm
+  sqlite libsqlite3.so
+  libsystemd.so
+  libtree-sitter.so
+  libxfixes
+  libxml2.so
+  m17n-lib
+  zlib
+)
+provides=("${pkgname}")
+source=(https://alpha.gnu.org/gnu/emacs/pretest/${pkgname}-${pkgver}.tar.xz{,.sig}) 
+b2sums=('9ef6f6bcca6b33fb9f70530ff1bb2ff8d56d88d201b8a9267d503e75f23efdb6e9707353495d1c504fbdd26a6a260d39cf98077188f41d65118af21e02715069'
+        'SKIP')
+validpgpkeys=('12BB9B400EE3F77282864D18272B5C54E015416A')
+
+build() {
+    local _confflags="--sysconfdir=/etc \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --localstatedir=/var \
+    --with-tree-sitter \
+    --with-harfbuzz \
+    --with-libsystemd \
+    --with-modules \
+    --with-jpeg \
+    --with-png \
+    --with-rsvg \
+    --without-cairo \
+    --without-gpm \
+    --without-sound \
+    --disable-build-details \
+    --with-x-toolkit=no \
+    --without-toolkit-scroll-bars \
+    --without-gsettings"
+
+    cd ${pkgname}-${pkgver}
+   
+    ./configure $_confflags
+    
+    make -j10
+}
+
+package() {
+ cd ${pkgname}-${pkgver}
+ make DESTDIR="${pkgdir}" install
+
+  # remove conflict with ctags package
+ mv "${pkgdir}"/usr/bin/{ctags,ctags.emacs}
+ mv "${pkgdir}"/usr/share/man/man1/{ctags.1.gz,ctags.emacs.1}
+
+  # fix user/root permissions on usr/share files
+  find "${pkgdir}"/usr/share/emacs/${pkgver} -exec chown root:root {} \;
+}

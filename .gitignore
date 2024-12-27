@@ -5,8 +5,10 @@ halant/
 trirong/
 *pkg.tar.zst
 *.tar.gz
+*.tar.xz
 *.zip
 *.ttf
 *.otf
 *.woff
+*.sig
 *.pcf
