@@ -2,7 +2,7 @@
 
 pkgbase=emacs
 pkgname=(emacs)
-pkgver=30.0.92
+pkgver=30.0.93
 pkgrel=1
 pkgdesc='The extensible, customizable, self-documenting real-time display editor'
 arch=('x86_64')
@@ -35,7 +35,7 @@ depends=(
 )
 provides=("${pkgname}")
 source=(https://alpha.gnu.org/gnu/emacs/pretest/${pkgname}-${pkgver}.tar.xz{,.sig})
-sha256sums=('d89287bd5a8381bb60e14aab95202377261d43a60d15dc0a61d0d662bc5626be'
+sha256sums=('4e50387505e1e05e83a39672e756ae1b76a24a8c981e7f981aec6e966cd6ff7f'
             'SKIP')
 validpgpkeys=('12BB9B400EE3F77282864D18272B5C54E015416A')
 
