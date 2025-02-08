@@ -1,0 +1,26 @@
+# Maintainer: Errenil Noel <errelinaaron@gmail.com>
+
+_pkgname=BrutalistMono
+pkgname=ttf-brutalist-mono
+pkgver=2.1.1
+pkgrel=1
+epoch=
+pkgdesc="The ultimate oldschool PC font pack"
+arch=('any')
+url="https://github.com/BRUTALISM/Brutalist/"
+license=('custom:CC-BY-SA-4.0')
+depends=('unzip')
+provides=('ttf-ibm-vga' 'ttf-vga')
+source=("${url}/releases/download/v${pkgver}/${_pkgname}.zip")
+md5sums=('SKIP')
+
+prepare() {
+    cd "$srcdir"
+    rm -r '__MACOSX'
+}
+
+package() {
+	  cd "$srcdir"
+    install -d "$pkgdir/usr/share/fonts/brutalist"
+    cp Brutalist*.ttf "$pkgdir/usr/share/fonts/brutalist/"
+}
