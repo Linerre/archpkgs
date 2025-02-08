@@ -27,7 +27,7 @@ depends=(
   libsm
   sqlite libsqlite3.so
   libsystemd.so
-  libtree-sitter.so
+  tree-sitter
   libxfixes
   libxml2.so
   m17n-lib
